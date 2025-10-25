@@ -1,10 +1,12 @@
-;; intel_syntax
-global _start
+global test
 
-_start:
-	jmp _end
+section .text
 
-_end:
-	mov rax, 60
-	mov rdi, 1
-	syscall
+test:
+	push rbp
+	mov rbp, rsp
+	mov eax, edi
+	add eax, esi
+	mov [rbp-0x4], eax
+	pop rbp
+	ret
