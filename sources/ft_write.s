@@ -4,6 +4,6 @@ section .text
 
 ft_write:
 	push rbp
-	mov rpb, rsp
+	mov rbp, rsp
 	pop rbp
 	ret

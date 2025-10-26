@@ -3,7 +3,12 @@ NAME 			:= libasm.a
 DIR_SOURCES		:= sources
 DIR_OBJECTS		:= .objs
 
-SOURCES			:= $(DIR_SOURCES)/test.s
+SOURCES			:= $(DIR_SOURCES)/ft_read.s \
+					$(DIR_SOURCES)/ft_strcmp.s \
+					$(DIR_SOURCES)/ft_strcpy.s \
+					$(DIR_SOURCES)/ft_strdup.s \
+					$(DIR_SOURCES)/ft_strlen.s \
+					$(DIR_SOURCES)/ft_write.s
 
 OBJECTS			:= $(SOURCES:%.s=$(DIR_OBJECTS)/%.o)
 DEPENDENCIES	:= $(OBJECTS:.o=.d)

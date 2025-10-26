@@ -5,6 +5,6 @@ section .text
 
 ft_strdup:
 	push rbp
-	mov rpb, rsp
+	mov rbp, rsp
 	pop rbp
 	ret
