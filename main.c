@@ -1,6 +1,4 @@
-#include <stdlib.h>
-
-#include "utest.h"
+#include <libasm.h>
 
 int main()
 {
