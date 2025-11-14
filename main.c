@@ -2,10 +2,16 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 int main(int ac, char **av)
 {
+
 	if (ac < 2) return 0;
+	printf("ft_write => %lu\n",ft_write(2, av[1], strlen(av[1])));
+	printf("write => %lu\n",write(2, av[1], strlen(av[1])));
+	
+	printf("\n");
 	printf("ft_strlen	\"%s\"  => %lu\n", av[1], ft_strlen(av[1]));
 	printf("strlen		\"%s\"  => %lu\n", av[1], strlen(av[1]));
 
