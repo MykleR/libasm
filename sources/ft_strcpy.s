@@ -4,17 +4,19 @@ global ft_strcpy
 section .text
 
 ft_strcpy:
-	xor rcx, rcx
-	xor rax, rax
-	mov rax, rdi
-.loop:
-	movzx rcx, byte [rsi]
-	test cl, cl
-	jz .done
-	mov [rdi], cl
-	inc rsi
-	inc rdi
-	jmp .loop
+	mov		rax, rdi		; ret = dst (saves 1st arg)
+	jmp		.condition
+
+.body:						; *dst++ = *src++
+	mov		[rdi], cl
+	inc		rsi
+	inc		rdi
+
+.condition:
+	movzx	rcx, byte [rsi]	; c = (unsigned char)(*src)
+	test	cl, cl			; c != '\0'
+	jnz		.body
+
 .done:
-	mov [rdi], 0x0
-	ret
+	mov		[rdi], 0x0		; *dst = '\0'
+	ret						; return dst (saved at start)

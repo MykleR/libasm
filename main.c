@@ -4,12 +4,23 @@
 #include <string.h>
 #include <unistd.h>
 
+void test_write(int out, const char *src, size_t n)
+{
+	errno = 0;
+	ssize_t r1 = ft_write(out, src, n);
+	printf("ft_write => %lu (errno=%d)\n",r1, errno);
+
+	errno = 0;
+	ssize_t r2 = write(out, src, n);
+	printf("write => %lu (errno=%d)\n",r2, errno);
+	errno = 0;
+}
+
 int main(int ac, char **av)
 {
 
 	if (ac < 2) return 0;
-	printf("ft_write => %lu\n",ft_write(2, av[1], strlen(av[1])));
-	printf("write => %lu\n",write(2, av[1], strlen(av[1])));
+	test_write(-1, "", 1);
 	
 	printf("\n");
 	printf("ft_strlen	\"%s\"  => %lu\n", av[1], ft_strlen(av[1]));
