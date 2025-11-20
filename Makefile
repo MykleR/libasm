@@ -8,6 +8,7 @@ SOURCES			:= $(DIR_SOURCES)/ft_read.s \
 					$(DIR_SOURCES)/ft_strcpy.s \
 					$(DIR_SOURCES)/ft_strdup.s \
 					$(DIR_SOURCES)/ft_strlen.s \
+					$(DIR_SOURCES)/ft_atoi_base.s \
 					$(DIR_SOURCES)/ft_write.s
 
 OBJECTS			:= $(SOURCES:%.s=$(DIR_OBJECTS)/%.o)

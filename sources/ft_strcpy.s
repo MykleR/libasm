@@ -18,5 +18,5 @@ ft_strcpy:
 	jnz		.body
 
 .done:
-	mov		[rdi], 0x0		; *dst = '\0'
+	mov		byte [rdi], 0x0		; *dst = '\0'
 	ret						; return dst (saved at start)

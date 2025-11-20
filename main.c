@@ -19,6 +19,8 @@ void test_write(int out, const char *src, size_t n)
 int main(int ac, char **av)
 {
 
+	printf("%d\n", ft_atoi_base(av[1], av[2]));
+	return 0;
 	if (ac < 2) return 0;
 	test_write(-1, "", 1);
 	
