@@ -2,31 +2,41 @@ global ft_atoi_base
 
 section .text
 
+; ft_check_base:
+;   Checks if a base string is valid for atoi_base.
+;	Clobbers rax, rdx, r8, r9
+;
+; @param RSI: Pointer to the null-terminated base string.
+;
+; @return RAX: 0 if the base is invalid.
+;              The length of the base (>1) if it is valid.
 ft_check_base:
 .init_array:
-    sub     rsp, 16
-	mov		rax, 0x280100003e00		; Binary mask sets forbidden chars to 1 in lookup tab
-	mov		qword [rsp], rax		; Init first half with mask
-	mov		qword [rsp + 8], 0		; Init second half with zero
 	xor		rdx, rdx
-   	mov		rax, rsi				; Copy pointer to char *base
+    sub     rsp, 32
+	mov		rax, 0x280100003e00		; Magic mask for forbidden chars
+	mov		qword [rsp], rax		; Init with mask, flags: + - (space) \r \f \v \n \t
+	mov		qword [rsp + 0x8], 0
+	mov		qword [rsp + 0x10], 0
+	mov		qword [rsp + 0x18], 0
+   	mov		rax, rsi				; rax = current pointer
 .loop_cond:
-	movzx	r8, byte [rax]
-    mov		r9, r8					; r9 = C
-	test	r8b, r8b
+	movzx	r8, byte [rax]			; Load char into 64-bit register
+	test	r8b, r8b				; \0 End of string reached ?
 	jz		.loop_end
-    shr     r8, 3					; r8 = byte index
-    and     r9, 7					; r9 = bit index
-    bts     [rsp + r8], r9			; Test and set the bit
-    jc      .fail                   ; If carry flag is set, it was a duplicate
+    bts     [rsp], r8				; Test and set the bit
+    jc      .fail                   ; CF=1 if bit was set (duplicate or forbidden)
     inc		rax
 	jmp		.loop_cond
 .loop_end:
-	sub		rax, rsi
-	cmp		rax, 2
+	sub		rax, rsi				; Calculate length
+	cmp		rax, 2					; Compare length with 2
 .fail:
-	cmovc	rax, rdx		; mov 0 in rax if less than 2
-	add		rsp, 16
+    ; If we jumped here via 'jc' (duplicate found), CF is 1.
+    ; If we fell through via 'cmp' (len < 2), CF is 1.
+    ; If we fell through via 'cmp' (len >= 2), CF is 0.
+	cmovc	rax, rdx
+	add		rsp, 32
 	ret
 
 ft_atoi_base:
