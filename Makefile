@@ -8,10 +8,11 @@ SOURCES			:= $(DIR_SOURCES)/ft_read.s \
 					$(DIR_SOURCES)/ft_strcpy.s \
 					$(DIR_SOURCES)/ft_strdup.s \
 					$(DIR_SOURCES)/ft_strlen.s \
-					$(DIR_SOURCES)/ft_atoi_base.s \
 					$(DIR_SOURCES)/ft_write.s
+SOURCES_B		:=	$(DIR_SOURCES)/ft_atoi_base_bonus.s
 
 OBJECTS			:= $(SOURCES:%.s=$(DIR_OBJECTS)/%.o)
+OBJECTS_B		:= $(SOURCES_B:%.s=$(DIR_OBJECTS)/%.o)
 DEPENDENCIES	:= $(OBJECTS:.o=.d)
 
 AR				:= ar
@@ -23,9 +24,12 @@ DIR_DUP			= mkdir -p $(@D)
 
 all: $(NAME)
 
+bonus:
+	@$(MAKE) --no-print-directory BONUS=1
+
 -include $(DEPENDENCIES)
 
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJECTS) $(if $(BONUS), $(OBJECTS_B))
 	@$(AR) rcs $@ $^
 	@printf " $(MSG_COMPILED)"
 

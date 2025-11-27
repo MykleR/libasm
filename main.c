@@ -1,4 +1,5 @@
 #include "headers/libasm.h"
+#include "headers/libasm_bonus.h"
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
