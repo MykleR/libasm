@@ -9,7 +9,11 @@ SOURCES			:= $(DIR_SOURCES)/ft_read.s \
 					$(DIR_SOURCES)/ft_strdup.s \
 					$(DIR_SOURCES)/ft_strlen.s \
 					$(DIR_SOURCES)/ft_write.s
-SOURCES_B		:=	$(DIR_SOURCES)/ft_atoi_base_bonus.s
+SOURCES_B		:=	$(DIR_SOURCES)/ft_atoi_base_bonus.s \
+					$(DIR_SOURCES)/ft_list_push_front_bonus.s
+					# $(DIR_SOURCES)/ft_list_size_bonus.s \
+					# $(DIR_SOURCES)/ft_list_sort_bonus.s \
+					# $(DIR_SOURCES)/ft_list_remove_if_bonus.s
 
 OBJECTS			:= $(SOURCES:%.s=$(DIR_OBJECTS)/%.o)
 OBJECTS_B		:= $(SOURCES_B:%.s=$(DIR_OBJECTS)/%.o)

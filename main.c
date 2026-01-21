@@ -17,14 +17,33 @@ void test_write(int out, const char *src, size_t n)
 	errno = 0;
 }
 
+
+void wrap_list_push_front(t_list **begin_list, void *data)
+{
+	int tripouille[42];
+	ft_list_push_front(begin_list, data);
+	tripouille[41] = 42;
+}
+
 int main(int ac, char **av)
 {
-
-	printf("%d\n", ft_atoi_base(av[1], av[2]));
+	t_list	*list = NULL;
+	wrap_list_push_front(&list, (void*)1);
+	wrap_list_push_front(NULL, "World");
+	for (t_list *tmp = list; tmp; tmp = tmp->next)
+		printf("Node(data:\"%p\", next:%p)\n", tmp->data, tmp->next);
+	while(list) {
+		t_list *tmp = list->next;
+		free(list);
+		list = tmp;
+	}
 	return 0;
+
 	if (ac < 2) return 0;
 	test_write(-1, "", 1);
-	
+
+	printf("ft_atoi_base = %d\n", ft_atoi_base(av[1], av[2]));
+
 	printf("\n");
 	printf("ft_strlen	\"%s\"  => %lu\n", av[1], ft_strlen(av[1]));
 	printf("strlen		\"%s\"  => %lu\n", av[1], strlen(av[1]));
