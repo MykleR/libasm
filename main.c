@@ -25,17 +25,28 @@ void wrap_list_push_front(t_list **begin_list, void *data)
 	tripouille[41] = 42;
 }
 
+int lower(void *d1, void *d2)
+{return ((long long)d1 > (long long)d2);}
+
 int main(int ac, char **av)
 {
 	t_list	*list = NULL;
-	wrap_list_push_front(&list, (void*)1);
-	wrap_list_push_front(NULL, "World");
-	for (t_list *tmp = list; tmp; tmp = tmp->next)
-		printf("Node(data:\"%p\", next:%p)\n", tmp->data, tmp->next);
-	while(list) {
-		t_list *tmp = list->next;
-		free(list);
-		list = tmp;
+	ft_list_push_front(&list, (void*)2);
+	ft_list_push_front(&list, (void*)3);
+	ft_list_push_front(&list, (void*)4);
+	ft_list_push_front(&list, (void*)-1);
+	ft_list_push_front(&list, (void*)5);
+	ft_list_push_front(&list, (void*)-2);
+	ft_list_push_front(&list, (void*)6);
+	ft_list_push_front(&list, (void*)-3);
+	ft_list_push_front(&list, (void*)7);
+	ft_list_push_front(&list, (void*)0);
+	ft_list_sort(&list, lower);
+	for (t_list *n=list; n; n=n->next)
+		printf("%llu\n", (long long)n->data);
+	for (t_list	*n=list, *tmp=list; n; n=tmp) {
+		tmp = n->next;
+		free(n);
 	}
 	return 0;
 
