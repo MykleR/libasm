@@ -7,11 +7,11 @@ ft_list_push_front:
 	; Parameters:
 	; RDI: pointer to the pointer of the head of the list (t_list **head)
 	; RSI: pointer to the data to be added as a node (void *data)
+	push	rbp
+	mov	rbp, rsp
 
 	; Check if new_node or head is NULL
 	test	rdi, rdi                ; Test if head pointer is NULL
-	jz      .done                   ; If NULL, do nothing and return
-	test    rsi, rsi                ; Test if data is NULL
 	jz      .done                   ; If NULL, do nothing and return
 
 	; Allocate memory for new node
@@ -29,4 +29,5 @@ ft_list_push_front:
 	mov		[rax + 8], rsi			; new_node->next = (*head);
 	mov		[rdi], rax				; *(head) = new_node;
 .done:
+	pop	rbp
 	ret
