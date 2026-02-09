@@ -17,8 +17,7 @@ ft_check_base:
 			mov			qword [rsp + 0x10], 0
 			mov			qword [rsp + 0x18], 0
    			mov			rax, rsi				; rax = current pointer
-.loop_check:
-			movzx		r8, byte [rax]			; Load char into 64-bit register
+.loop_check:movzx		r8, byte [rax]			; Load char into 64-bit register
 			test		r8b, r8b				; \0 End of string reached ?
 			jz			.loop_end
 			bts			[rsp], r8				; Test and set the bit
@@ -63,8 +62,7 @@ ft_atoi_base:
 			call		ft_get_sign
 			mov			r8, rax
 			xor			rax, rax
-.atoi:
-			cmp			byte [rdi], 0
+.atoi:		cmp			byte [rdi], 0
 			je			.done
 			mov			r9, -1					; Index in base, used after in calcul
 			mov			r11b, byte [rdi]		; ...
