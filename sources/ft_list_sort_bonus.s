@@ -1,29 +1,11 @@
 global ft_list_sort
 
+%include "utils.s"
+
 section .text
 
-%macro SET_STACK 0
-	push	rbx
-	push	r12
-	push	r13
-	push	r14
-	push	r15
-	push	rbp
-	mov		rbp, rsp
-%endm
-
-%macro STACK_RET 0
-	pop		rbp
-	pop		r15
-	pop		r14
-	pop		r13
-	pop		r12
-	pop		rbx
-	ret
-%endm
-
 ft_list_sort:
-			SET_STACK
+			STACK_SET
 			mov			r15, rsi			; Save int (*cmp)()
 			test		rdi, rdi			; if (head == NUL) ret
 			jz			.done
