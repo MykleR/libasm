@@ -15,7 +15,7 @@ ft_list_push_front:
 		test		rax, rax                ; Check if malloc succeeded
 		jz			.done                   ; If NULL, do nothing and return
 		mov			[rax], rsi              ; new_node->data = data
-		mov			rsi, [rdi]				; Address of new_node->next
+		mov			rsi, [rdi]				; Dereferencing head, rsi = *head
 		mov			[rax + 8], rsi			; new_node->next = (*head);
 		mov			[rdi], rax				; *(head) = new_node;
 .done:	STACK_RET
