@@ -15,22 +15,21 @@ ft_list_remove_if:
 			mov			r14, rdx		; Save cmp
 			mov			r13, rsi		; Save data_ref
 			mov			r12, rdi		; Save head
-.loop_start:mov			r8, [r12]		; t_list *tmp = *head
-			test		r8, r8			; if (tmp == NULL) break
+.loop_start:mov			rbx, [r12]		; t_list *tmp = *head
+			test		rbx, rbx			; if (tmp == NULL) break
 			jz			.done
-			mov			rdi, [r8]		; rdi = tmp->data
+			mov			rdi, [rbx]		; rdi = tmp->data
 			mov			rsi, r13		; rsi = data_ref
 			call		r14				; cmp(tmp->data, data_ref)
 			test		rax, rax		; if (rax != 0) -> next
 			jnz			.loop_next
-			mov			r8, [r12]		; tmp = *head
-			mov			r9, [r8 + 8]	; next = tmp->next;
+			mov			r9, [rbx + 8]	; next = tmp->next;
 			mov			[r12], r9		; *head = next;
 			test		r15, r15		; if (free_fct != NULL) free_fct()
 			jz			.loop_free
-			mov			rdi, [r8]		; rdi = tmp->data;
+			mov			rdi, [rbx]		; rdi = tmp->data;
 			call		r15				; free_fct(tmp->data);
-.loop_free: mov			rdi, r8			; rdi = tmp;
+.loop_free: mov			rdi, rbx			; rdi = tmp;
 			call		free wrt ..plt	; free(tmp);
 			jmp			.loop_start
 .loop_next:
