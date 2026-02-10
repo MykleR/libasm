@@ -4,7 +4,7 @@
 extern malloc: proc
 extern __errno_location
 
-ENOMEN equ 12
+ENOMEM equ 12
 SIZEOF_LIST equ 16
 
 %macro STACK_SET 0
