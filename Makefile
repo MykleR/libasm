@@ -9,7 +9,8 @@ SOURCES			:= $(DIR_SOURCES)/ft_read.s \
 					$(DIR_SOURCES)/ft_strdup.s \
 					$(DIR_SOURCES)/ft_strlen.s \
 					$(DIR_SOURCES)/ft_write.s \
-					$(DIR_SOURCES)/ft_calloc.s
+					$(DIR_SOURCES)/ft_calloc.s \
+					$(DIR_SOURCES)/ft_simd_memchr.s
 SOURCES_B		:=	$(DIR_SOURCES)/ft_atoi_base_bonus.s \
 					$(DIR_SOURCES)/ft_list_push_front_bonus.s \
 					$(DIR_SOURCES)/ft_list_size_bonus.s \

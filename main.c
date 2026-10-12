@@ -30,6 +30,11 @@ int lower(void *d1, void *d2)
 
 int main(int ac, char **av)
 {
+	const char *haystack = "3120534740567089";
+	const char *res= ft_simd_memchr(haystack, '0', 0);
+	if (res) printf("ft_simd_memchr => %lu\n", res - haystack);
+	else printf("ft_simd_memchr => NULL\n");
+
 	int *array = ft_calloc(-1, sizeof(int));
 	printf("errno = %d\n", errno);
 	errno = 0;
@@ -48,52 +53,52 @@ int main(int ac, char **av)
 	free(array);
 
 	t_list	*list = NULL;
-	ft_list_push_front(&list, (void*)2);
-	ft_list_push_front(&list, (void*)3);
-	ft_list_push_front(&list, (void*)4);
-	ft_list_push_front(&list, (void*)-1);
-	ft_list_push_front(&list, (void*)5);
-	ft_list_push_front(&list, (void*)-2);
-	ft_list_push_front(&list, (void*)6);
-	ft_list_push_front(&list, (void*)-3);
-	ft_list_push_front(&list, (void*)7);
-	ft_list_push_front(&list, (void*)0);
-	ft_list_sort(&list, lower);
-	for (t_list *n=list; n; n=n->next)
-		printf("%llu\n", (long long)n->data);
-	for (t_list	*n=list, *tmp=list; n; n=tmp) {
-		tmp = n->next;
-		free(n);
-	}
-
-	test_write(0, 0, 1);
-	if (ac < 2) return 0;
-
-	printf("ft_atoi_base = %d\n", ft_atoi_base(av[1], av[2]));
-
-	printf("\n");
-	printf("ft_strlen	\"%s\"  => %lu\n", av[1], ft_strlen(av[1]));
-	printf("strlen		\"%s\"  => %lu\n", av[1], strlen(av[1]));
-
-	printf("\n");
-	char dest[1024] = {0};
-	printf("ft_strcpy	\"%s\", at %p => \"%s\"\n", av[1], ft_strcpy(dest, av[1]), dest);
-	memset(dest, 0, 1024);
-	printf("strcpy		\"%s\", at %p => \"%s\"\n", av[1], strcpy(dest, av[1]), dest);
-
-	printf("\n");
-	char *dup1 = ft_strdup(av[1]);
-	printf("ft_strdup	\"%s\"  => \"%s\" (errno=%d)\n", av[1], dup1 ? dup1 : "NULL", errno);
-	free(dup1);
-	errno = 0;
-	char *dup2 = strdup(av[1]);
-	printf("strdup		\"%s\"  => \"%s\" (errno=%d)\n", av[1], dup2 ? dup2 : "NULL", errno);
-	free(dup2);
-
-	printf("\n");
-	if (ac < 3) return 0;
-	printf("ft_strcmp	\"%s\", \"%s\"  => %d\n", av[1], av[2], ft_strcmp(av[1], av[2]));
-	printf("strcmp		\"%s\", \"%s\"  => %d\n", av[1], av[2], strcmp(av[1], av[2]));
+	// ft_list_push_front(&list, (void*)2);
+	// ft_list_push_front(&list, (void*)3);
+	// ft_list_push_front(&list, (void*)4);
+	// ft_list_push_front(&list, (void*)-1);
+	// ft_list_push_front(&list, (void*)5);
+	// ft_list_push_front(&list, (void*)-2);
+	// ft_list_push_front(&list, (void*)6);
+	// ft_list_push_front(&list, (void*)-3);
+	// ft_list_push_front(&list, (void*)7);
+	// ft_list_push_front(&list, (void*)0);
+	// ft_list_sort(&list, lower);
+	// for (t_list *n=list; n; n=n->next)
+	// 	printf("%llu\n", (long long)n->data);
+	// for (t_list	*n=list, *tmp=list; n; n=tmp) {
+	// 	tmp = n->next;
+	// 	free(n);
+	// }
+	//
+	// test_write(0, 0, 1);
+	// if (ac < 2) return 0;
+	//
+	// printf("ft_atoi_base = %d\n", ft_atoi_base(av[1], av[2]));
+	//
+	// printf("\n");
+	// printf("ft_strlen	\"%s\"  => %lu\n", av[1], ft_strlen(av[1]));
+	// printf("strlen		\"%s\"  => %lu\n", av[1], strlen(av[1]));
+	//
+	// printf("\n");
+	// char dest[1024] = {0};
+	// printf("ft_strcpy	\"%s\", at %p => \"%s\"\n", av[1], ft_strcpy(dest, av[1]), dest);
+	// memset(dest, 0, 1024);
+	// printf("strcpy		\"%s\", at %p => \"%s\"\n", av[1], strcpy(dest, av[1]), dest);
+	//
+	// printf("\n");
+	// char *dup1 = ft_strdup(av[1]);
+	// printf("ft_strdup	\"%s\"  => \"%s\" (errno=%d)\n", av[1], dup1 ? dup1 : "NULL", errno);
+	// free(dup1);
+	// errno = 0;
+	// char *dup2 = strdup(av[1]);
+	// printf("strdup		\"%s\"  => \"%s\" (errno=%d)\n", av[1], dup2 ? dup2 : "NULL", errno);
+	// free(dup2);
+	//
+	// printf("\n");
+	// if (ac < 3) return 0;
+	// printf("ft_strcmp	\"%s\", \"%s\"  => %d\n", av[1], av[2], ft_strcmp(av[1], av[2]));
+	// printf("strcmp		\"%s\", \"%s\"  => %d\n", av[1], av[2], strcmp(av[1], av[2]));
 
 	return 0;
 }
