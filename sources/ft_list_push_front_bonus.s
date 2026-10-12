@@ -1,6 +1,6 @@
 global ft_list_push_front
 
-%include "utils.s"
+%include "utils.inc"
 
 section .text
 

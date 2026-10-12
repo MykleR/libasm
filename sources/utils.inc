@@ -10,7 +10,7 @@ SIZEOF_LIST equ 16
 %macro STACK_SET 0
 	push_all	rbx, r12, r13, r14, r15, rbp
 	mov			rbp, rsp
-	sub			rsp, 16
+	sub			rsp, 8
 %endm
 
 %macro STACK_RET 0
@@ -20,15 +20,15 @@ SIZEOF_LIST equ 16
 %endm
 
 %macro MALLOC 1
-	push_all	rdi, rsi
-	mov			rdi, %1
+	push_all	rdi, rsi, %1
+	pop			rdi
 	call		malloc wrt ..plt
 	pop_all		rsi, rdi
 %endm
 
 %macro ERRNO_SET 1
-	push_all	rax, rcx
-	mov			rcx, %1
+	push_all	rax, rcx, %1
+	pop			rcx
 	call		__errno_location wrt ..plt
 	mov			[rax], rcx
 	pop_all		rcx, rax
@@ -46,6 +46,21 @@ SIZEOF_LIST equ 16
         pop %1
         %rotate 1
     %endrep
+%endmacro
+
+%macro ZERO_MEM 2
+    pushfq
+	push_all rax, rcx, rdi, %1, %2
+
+    pop rcx
+    pop rdi
+
+    xor eax, eax
+    cld
+    rep stosb
+
+	pop_all rdi, rcx, rax
+    popfq
 %endmacro
 
 %endif

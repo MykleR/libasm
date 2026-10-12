@@ -2,7 +2,7 @@ extern ft_strlen: proc
 extern ft_strcpy: proc
 global ft_strdup
 
-%include "utils.s"
+%include "utils.inc"
 
 section .text
 
@@ -19,5 +19,5 @@ ft_strdup:
 		STACK_RET
 .error:
 		xor			rax, rax			; return NULL
-		ERRNO_SET	ENOMEN
+		ERRNO_SET	ENOMEM
 		STACK_RET

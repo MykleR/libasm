@@ -1,4 +1,5 @@
 global ft_atoi_base
+%include "utils.inc"
 
 section .text
 
@@ -9,6 +10,7 @@ section .text
 ;              The length of the base (>1) if it is valid.
 ft_check_base:
 .init_array:
+			STACK_SET
 			xor			rdx, rdx
 			sub			rsp, 32
 			mov			rax, 0x280100003e00		; Magic mask for forbidden chars
@@ -28,9 +30,10 @@ ft_check_base:
 			cmp			rax, 2					; Compare length with 2
 .done:		cmovc		rax, rdx				; If jumped via: 'jc' duplicate, or: 'cmp' len < 2, set to 0
 			add			rsp, 32
-			ret
+			STACK_RET
 
 ft_skip_empty:
+			STACK_SET
 			mov			r9, 0x100003e00			; MASK for [space], \t, \n, \r, \v, \f
 .loop:		movzx		r8, byte [rdi]
 			cmp			r8, 32					; Check if char > 32
@@ -39,9 +42,10 @@ ft_skip_empty:
 			jnc			.done
 			inc			rdi
 			jmp			.loop
-.done:		ret
+.done:		STACK_RET
 
 ft_get_sign:
+			STACK_SET
 			xor			r10d, r10d
 			jmp			.check
 .negative:	inc			r10d					; Count +1 minus
@@ -52,9 +56,10 @@ ft_get_sign:
 			je			.negative				; Yes, continue next and inc r10d
 .done:		and			r10d, 1					; 1 means negative and 0 positive
 			neg			r10d					; 0 -> 0, 1 -> -1 (0xFF...FF)
-			ret
+			STACK_RET
 
 ft_atoi_base:
+			STACK_SET
 			call		ft_check_base
 			test		rax, rax
 			jz			.fail
@@ -79,6 +84,6 @@ ft_atoi_base:
 			jmp			.atoi
 .done:		xor			rax, r10				; If neg: invert bits (One's Complement)
 			sub			rax, r10				; If neg: add 1 (Complete Two's Complement) subtracting -1 <=> adding 1
-			ret
+			STACK_RET
 .fail:		xor			rax, rax
-			ret
+			STACK_RET

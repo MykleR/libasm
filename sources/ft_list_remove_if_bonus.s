@@ -1,7 +1,7 @@
 extern free: proc
 global ft_list_remove_if
 
-%include "utils.s"
+%include "utils.inc"
 
 section .text
 

@@ -1,8 +1,11 @@
 global ft_strcpy
 
+%include "utils.inc"
+
 section .text
 
 ft_strcpy:
+		STACK_SET
 		mov			rax, rdi				; ret = dst (saves 1st arg)
 		jmp			.cond
 .loop:	mov			[rdi], cl				; *dst = *src
@@ -12,4 +15,4 @@ ft_strcpy:
 		test		cl, cl					; c != '\0'
 		jnz			.loop
 .done:	mov			byte [rdi], 0x0			; *dst = '\0'
-		ret									; return dst (saved at start)
+		STACK_RET							; return dst (saved at start)

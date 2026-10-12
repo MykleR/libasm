@@ -1,8 +1,11 @@
 global ft_strcmp
 
+%include "utils.inc"
+
 section .text
 
 ft_strcmp:
+		STACK_SET
 		jmp			.cond
 .loop:
 		inc			rdi					; s1++
@@ -14,4 +17,4 @@ ft_strcmp:
 		jnz			.loop
 .done:	movzx		rcx, byte[rsi]
 		sub			rax, rcx			; return *s1 - *s2
-		ret
+		STACK_RET

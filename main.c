@@ -30,6 +30,23 @@ int lower(void *d1, void *d2)
 
 int main(int ac, char **av)
 {
+	int *array = ft_calloc(-1, sizeof(int));
+	printf("errno = %d\n", errno);
+	errno = 0;
+	int *array2 = calloc(-1, sizeof(int));
+	printf("errno = %d\n", errno);
+	errno = 0;
+	if (array == NULL) {
+		printf("ft_calloc failed\n");
+		return 1;
+	}
+	int  cpy[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	memcpy(array, cpy, 10 * sizeof(int));
+	for (int i = 0; i < 10; i++)
+		printf("%d ", array[i]);
+	printf("\n");
+	free(array);
+
 	t_list	*list = NULL;
 	ft_list_push_front(&list, (void*)2);
 	ft_list_push_front(&list, (void*)3);
@@ -48,10 +65,9 @@ int main(int ac, char **av)
 		tmp = n->next;
 		free(n);
 	}
-	return 0;
 
+	test_write(0, 0, 1);
 	if (ac < 2) return 0;
-	test_write(-1, "", 1);
 
 	printf("ft_atoi_base = %d\n", ft_atoi_base(av[1], av[2]));
 
